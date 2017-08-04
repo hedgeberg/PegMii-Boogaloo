@@ -27,3 +27,5 @@ https://bugs.chromium.org/p/project-zero/issues/detail?id=999
 https://bugs.chromium.org/p/project-zero/issues/detail?id=1044
 
 http://www.phrack.org/papers/attacking_javascript_engines.html
+
+https://github.com/tunz/js-vuln-db/blob/acfa44dfde105afc610a9436c13ef2d4dd22aae6/jsc/CVE-2016-1857.md
