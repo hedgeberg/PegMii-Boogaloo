@@ -13,3 +13,15 @@ https://bugs.chromium.org/p/project-zero/issues/detail?id=1101
 https://bugs.chromium.org/p/project-zero/issues/detail?id=1109
 
 https://bugs.chromium.org/p/project-zero/issues/detail?id=1105
+
+https://bugs.chromium.org/p/project-zero/issues/detail?id=1090
+
+https://bugs.chromium.org/p/project-zero/issues/detail?id=1082
+
+https://bugs.chromium.org/p/project-zero/issues/detail?id=1080
+
+https://bugs.chromium.org/p/project-zero/issues/detail?id=1085
+
+https://bugs.chromium.org/p/project-zero/issues/detail?id=999
+
+https://bugs.chromium.org/p/project-zero/issues/detail?id=1044
