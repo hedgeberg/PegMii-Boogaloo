@@ -25,3 +25,5 @@ https://bugs.chromium.org/p/project-zero/issues/detail?id=1085
 https://bugs.chromium.org/p/project-zero/issues/detail?id=999
 
 https://bugs.chromium.org/p/project-zero/issues/detail?id=1044
+
+http://www.phrack.org/papers/attacking_javascript_engines.html
