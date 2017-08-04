@@ -9,3 +9,5 @@ https://bugs.chromium.org/p/project-zero/issues/detail?id=1249
 https://pastebin.com/buAqEm74
 
 https://bugs.chromium.org/p/project-zero/issues/detail?id=1101
+
+https://bugs.chromium.org/p/project-zero/issues/detail?id=1109
