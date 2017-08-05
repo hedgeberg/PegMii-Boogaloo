@@ -8,7 +8,7 @@ args = new Array(0x10000);
 args.fill();
 args = args.map((_, i) => 'a' + i).join(', ');
 
-let gun = eval(`(function () {
+var gun = eval(`(function () {
     class A {
 
     }
@@ -38,6 +38,6 @@ let gun = eval(`(function () {
     return new B();
 })()`);
 
-for (let i = 0; i < 0x10000; i++)
+for (var i = 0; i < 0x10000; i++)
     gun.trigger();
 </script>

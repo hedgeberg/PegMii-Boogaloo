@@ -10,11 +10,11 @@
                 alert("test2");
                 Array.prototype.__defineGetter__(100, () => 1);
 
-                let f = document.body.appendChild(document.createElement('iframe'));
-                let a = new f.contentWindow.Array(2.3023e-320, 2.3023e-320);
-                let b = new f.contentWindow.Array(2.3023e-320, 2.3023e-320);
+                var f = document.body.appendChild(document.createElement('iframe'));
+                var a = new f.contentWindow.Array(2.3023e-320, 2.3023e-320);
+                var b = new f.contentWindow.Array(2.3023e-320, 2.3023e-320);
                 alert("test");
-                let c = Array.prototype.concat.call(a, b);
+                var c = Array.prototype.concat.call(a, b);
 
                 alert(c);
             }
