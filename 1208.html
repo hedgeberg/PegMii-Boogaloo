@@ -8,7 +8,7 @@
         <script>
             window.onload = function(){
                 alert("test2");
-                Array.prototype.__defineGetter__(100, () => 1);
+                Array.prototype.__defineGetter__(100, function(){return 1});
 
                 var f = document.body.appendChild(document.createElement('iframe'));
                 var a = new f.contentWindow.Array(2.3023e-320, 2.3023e-320);
