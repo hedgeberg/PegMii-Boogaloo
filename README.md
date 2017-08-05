@@ -37,3 +37,5 @@ https://github.com/tunz/js-vuln-db/blob/master/jsc/CVE-2017-2491.md
 https://bugs.chromium.org/p/project-zero/issues/detail?id=1173
 
 https://bugs.chromium.org/p/project-zero/issues/detail?id=1220
+
+https://bugs.chromium.org/p/project-zero/issues/detail?id=1165

