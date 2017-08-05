@@ -39,3 +39,5 @@ https://bugs.chromium.org/p/project-zero/issues/detail?id=1173
 https://bugs.chromium.org/p/project-zero/issues/detail?id=1220
 
 https://bugs.chromium.org/p/project-zero/issues/detail?id=1165
+
+https://github.com/Fire30/PS4-2014-1303-POC/blob/master/ps4sploit.html
