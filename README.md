@@ -33,3 +33,5 @@ https://github.com/tunz/js-vuln-db/blob/acfa44dfde105afc610a9436c13ef2d4dd22aae6
 https://bugs.chromium.org/p/project-zero/issues/detail?id=862
 
 https://github.com/tunz/js-vuln-db/blob/master/jsc/CVE-2017-2491.md
+
+https://bugs.chromium.org/p/project-zero/issues/detail?id=1173
