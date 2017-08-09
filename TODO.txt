@@ -1,0 +1,11 @@
+TODO:
+
+
+-Dump after control, Free w/no realloc, and Free w/ realloc cases 
+-Locating the struct "x" in memory by redefing type with canary name
+-spray heap to determine operating range
+-Test functionality of alert breakpoints 
+-rebase to add an exploit_main function which can beat the JIT
+-make each integer written into arr unique so we can locate the allocation space of the array. 
+-Dumps like a truck. Truck. Truck. 
+-Boys like what. What. What. 
