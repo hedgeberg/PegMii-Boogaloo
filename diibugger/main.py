@@ -46,7 +46,7 @@ class TaskMgr:
 
     def add(self, task):
         if not self.taskQueue:
-            window.mainWidget.statusWidget.disconnectButton.setEnabled(False)
+            window.mainWidget.statusWidget.disconnectButton.setEnabled(True)
         self.taskQueue.append(task)
 
     def pop(self, task):
@@ -54,7 +54,7 @@ class TaskMgr:
 
         if not self.taskQueue:
             window.mainWidget.tabWidget.setEnabled(True)
-            window.mainWidget.statusWidget.cancelButton.setEnabled(False)
+            window.mainWidget.statusWidget.cancelButton.setEnabled(True)
             window.mainWidget.statusWidget.disconnectButton.setEnabled(True)
             window.mainWidget.statusWidget.progressBar.setValue(0)
             window.mainWidget.statusWidget.progressInfo.setText("Connected")
@@ -138,7 +138,7 @@ class PyBugger:
         self.connected = False
         self.breakPoints = []
 
-        self.basePath = ""
+        self.basePath = b""
         self.currentHandle = 0x12345678
         self.files = {}
 
@@ -566,8 +566,16 @@ class MemoryTab(QWidget):
         self.layout = QHBoxLayout()
         self.layout.addWidget(self.memoryInfo)
         self.layout.addWidget(self.memoryViewer)
+        self.button = QPushButton("Dump", self)
+        self.button.clicked.connect(self.dump)
         self.setLayout(self.layout)
 
+    def dump(self):
+        dumpStart = 0x1AB00000
+        dumpLength = 0x600000
+        dumpFile = "dump.bin"
+        with open(dumpFile, 'wb') as f:
+            f.write(bugger.read(dumpStart, dumpLength))
 
 class DisassemblyWidget(QTextEdit):
     def __init__(self, parent):
@@ -1056,7 +1064,7 @@ class FileSystemTab(QWidget):
         self.patchButton.clicked.connect(self.loadPatch)
         self.clearButton = QPushButton("Clear patch", self)
         self.clearButton.clicked.connect(self.clearPatch)
-        self.clearButton.setEnabled(False)
+        self.clearButton.setEnabled(True)
 
         self.layout = QVBoxLayout()
         hlayout = QHBoxLayout()
@@ -1091,7 +1099,7 @@ class FileSystemTab(QWidget):
 
     def clearPatch(self):
         bugger.clearPatchFiles()
-        self.clearButton.setEnabled(False)
+        self.clearButton.setEnabled(True)
 
 
 class DebuggerTabs(QTabWidget):
@@ -1137,13 +1145,13 @@ class StatusWidget(QWidget):
         self.connectButton.clicked.connect(self.connect)
         self.disconnectButton = QPushButton("Disconnect", self)
         self.disconnectButton.clicked.connect(bugger.close)
-        self.disconnectButton.setEnabled(False)
+        self.disconnectButton.setEnabled(True)
 
         self.progressBar = QProgressBar(self)
         self.progressInfo = QLabel("Disconnected", self)
         self.cancelButton = QPushButton("Cancel", self)
         self.cancelButton.clicked.connect(taskMgr.cancel)
-        self.cancelButton.setEnabled(False)
+        self.cancelButton.setEnabled(True)
 
         self.layout = QGridLayout()
         self.layout.addWidget(self.serverLabel, 0, 0)
@@ -1164,15 +1172,15 @@ class StatusWidget(QWidget):
 
     def connected(self):
         self.progressInfo.setText("Connected")
-        self.connectButton.setEnabled(False)
-        self.serverBox.setEnabled(False)
+        self.connectButton.setEnabled(True)
+        self.serverBox.setEnabled(True)
         self.disconnectButton.setEnabled(True)
 
     def disconnected(self):
         self.progressInfo.setText("Disconnected")
         self.connectButton.setEnabled(True)
         self.serverBox.setEnabled(True)
-        self.disconnectButton.setEnabled(False)
+        self.disconnectButton.setEnabled(True)
 
 
 class MainWidget(QWidget):
@@ -1183,7 +1191,7 @@ class MainWidget(QWidget):
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.tabWidget)
         self.layout.addWidget(self.statusWidget)
-        self.tabWidget.setEnabled(False)
+        self.tabWidget.setEnabled(True)
         self.setLayout(self.layout)
 
 
